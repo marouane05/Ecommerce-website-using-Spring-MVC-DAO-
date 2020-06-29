@@ -1,0 +1,240 @@
+@import url(https://fonts.googleapis.com/css?family=Abril+Fatface);
+
+body{
+	background: #FFF;
+	color:#8C7D63;
+	font-family: Lucida Console;
+	text-transform: uppercase;
+	font-size:14px;
+}
+
+.bg{
+	background-color: #F0E1E1;
+	padding: 10px;
+	margin: 0 auto;
+	width: 85%;
+  max-width:1200px;
+	z-index: -1;
+	height: 85vh;
+	overflow-y:scroll;
+}
+
+.wrapper{
+	 text-align: center;
+	 padding-top:10px;
+	 background-image: url(https://31.media.tumblr.com/f0d19d79ded8938201c961fe9571b0eb/tumblr_inline_nrhhjk9ltH1qid2nw_500.gif);
+	 padding:15px;
+	 box-shadow:2px 2px rgba(0,0,0,0.2);
+	 border: 1px solid #8C7D63;
+	 width:75%;
+	 margin:5px auto;
+	 overflow: hidden;
+	 z-index: 999;
+	 position: relative;
+}
+
+.topbar{
+	 text-align: center;
+	 padding-top:10px;
+	 background-image: url(https://31.media.tumblr.com/f0d19d79ded8938201c961fe9571b0eb/tumblr_inline_nrhhjk9ltH1qid2nw_500.gif);
+	 padding: 5px 15px;
+	 box-shadow:2px 2px rgba(0,0,0,0.2);
+	 border: 1px solid #8C7D63;
+	 width:75%;
+	 margin:5px auto;
+	 overflow: hidden;
+}
+
+h1{
+	font-family: 'Abril Fatface', cursive;
+	font-size: 2.5em;
+	font-weight: 400;
+	text-transform: capitalize;
+	-webkit-margin-before: 0.3em;
+	-webkit-margin-after: 0.3em;
+  letter-spacing: -2px;
+}
+
+h1 span {
+  position: relative; 
+  display:inline-block;
+}
+
+h1 span:before,
+h1 span:after {
+  content: "";
+  position: absolute;
+  height: 0.3em;
+  border-bottom: 1px solid #8C7D63;
+  border-top: 1px solid #8C7D63;
+  top: 45%;
+  width: 72px;
+}
+h1 span:before {
+  right: 100%;
+  margin-right: 8px;
+}
+h1 span:after {
+  left: 100%;
+  margin-left: 8px;
+}
+
+h2{
+	text-align: right;
+	-webkit-margin-before: 0.1em;
+	-webkit-margin-after: 0.1em;
+	color: #8C7D63;
+	font-family: 'Abril Fatface', cursive;
+	font-weight: 400;
+	font-size: 1.3em;
+	text-transform: capitalize;
+}
+
+
+.teaoption{
+	background:#fff;
+	border: 1px solid #8C7D63;
+	margin: 2.5px auto;
+	display: inline-block;
+	box-shadow:2px 2px rgba(0,0,0,0.2);
+	padding:5px;
+	height:74px;
+	width:86px;
+	text-align: center;
+	overflow: hidden;
+}
+
+.teaoption.active{
+	min-width:283px;
+	min-height: 74px;
+	text-align: left;
+}
+
+.teaimg{
+	padding:5px;
+	position:relative;
+	height: 63px;
+	max-width: 74px;
+	position: relative;
+}
+
+.teainfo{
+	text-align: right;
+	background-color: #F0E1E1;
+	border: 1px solid #8C7D63;
+	box-shadow:2px 2px rgba(0,0,0,0.2);
+	padding:2px;
+	height:65px;
+	width: 66%;
+	display:none;
+	margin-left: 91px;
+	margin-top:-75px;
+}
+
+
+
+.blabla{
+	text-align: right;
+	-webkit-margin-before: 0.1em;
+	-webkit-margin-after: 0.1em;
+	font-size: 8px;	
+}
+
+.price{
+	font-size: 1.2em;
+	font-style: italic;
+	text-align: center;
+	font-family: 'Abril Fatface', cursive;
+	-webkit-margin-before: 0.1em;
+	-webkit-margin-after: 0.1em;
+}
+
+.buttons{
+	text-align:right;
+	display: inline-block;
+}
+
+.spacer{
+	width:50%;
+	display: inline-block;
+}
+
+.headerimg{
+	text-align: left;
+	display:inline-block;
+}
+
+.roundbuttons{
+	position:fixed;
+	top:15%;
+	width:8%;
+	margin: 0 auto;
+	padding:3px 3px 3px 7px;
+	background-color: #EBB9E1;
+	font-size: 1.2em;
+	font-style: italic;
+	text-align: center;
+	font-family: 'Abril Fatface', cursive;
+	text-transform: capitalize;
+	border: 1px solid #8C7D63;
+	border-right: 0px;
+	box-shadow:0px 2px rgba(0,0,0,0.2);
+	z-index: 9;
+}
+
+.roundbuttons:before, .roundbuttons2:before {
+content: '';
+position:absolute;
+  top: 0;
+  left: -1px;
+padding-left: 10px;
+  height: 10%;
+  border-left: 1.2em solid #F0E1E1; /* MUST CHANGE THIS COLOUR TO MATCH YOUR BACKGROUND!*/
+  border-right: 1.2em solid transparent;
+  border-top: 0.9em solid transparent;
+  border-bottom: 0.9em solid transparent;
+} 
+
+
+.roundbuttons:hover, .roundbuttons2:hover{
+	background-color:#fff ;
+	-webkit-transition: background-color 0.5s;
+transition: background-color 0.5s;
+}
+
+
+.roundbuttons2{
+	position:fixed;
+	top:25%;
+	width:8%;
+	margin: 0 auto;
+	padding:3px 3px 3px 7px;
+	background-color: #EBB9E1;
+	font-size: 1.2em;
+	font-style: italic;
+	text-align: center;
+	font-family: 'Abril Fatface', cursive;
+	text-transform: capitalize;
+	border: 1px solid #8C7D63;
+	border-right: 0px;
+	box-shadow:0px 2px rgba(0,0,0,0.2);
+	z-index: 9;
+}
+
+
+.myOrder{
+	text-align: center;
+	 padding-top:10px;
+	 margin-top:-58px;
+	 background-image: url(https://31.media.tumblr.com/f0d19d79ded8938201c961fe9571b0eb/tumblr_inline_nrhhjk9ltH1qid2nw_500.gif);
+	 padding:15px;
+	 box-shadow:2px 2px rgba(0,0,0,0.2);
+	 border: 1px solid #8C7D63;
+	 width:75%;
+	 margin:5px auto;
+	 overflow: hidden;
+	 z-index: 999;
+	 display: none;
+	 z-index: 9;
+	 position: relative;
+}
