@@ -2,6 +2,7 @@ package com.dryouch.account.controller;
 
 import com.dryouch.account.dao.ArticleDAO;
 import com.dryouch.account.dao.ArticleDAOImpl;
+import com.dryouch.account.dao.CommandeDAO;
 import com.dryouch.account.dao.CommandeDAOImpl;
 import com.dryouch.account.dao.SecurityService;
 import com.dryouch.account.dao.UserService;
@@ -11,6 +12,8 @@ import com.dryouch.account.model.User;
 import com.dryouch.account.validator.UserValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,10 +21,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,13 +42,14 @@ public class UserController {
 
     @Autowired
     private SecurityService securityService;
+   
 
     @Autowired
     private UserValidator userValidator;
 @Autowired 
-private ArticleDAOImpl articleDAO ;
+private ArticleDAO  articleDAO ;
 @Autowired 
-private CommandeDAOImpl commandeDAO ;
+private CommandeDAO commandeDAO ;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -78,7 +86,14 @@ private CommandeDAOImpl commandeDAO ;
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
-        return "welcome";
+
+    	 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if( authentication.getAuthorities().stream()
+  	          .anyMatch(r -> r.getAuthority().equals("ROLE_USER"))) {
+    	return "welcome";
+    }
+    	
+        return "adminwelcome";
     }
     
     @RequestMapping(value="/voirarticles")
@@ -190,5 +205,51 @@ private CommandeDAOImpl commandeDAO ;
 		return model;
     }
     
+    
+    @RequestMapping(value = { "/ajout"}, method = RequestMethod.GET)
+    public String AjoutProduit(Model model) {
+        return "ajoutproduit";
+    }
+    
+    @RequestMapping(value = { "/ajoutprod"}, method = RequestMethod.GET)
+    public String AjoutProduitEffectuer(@RequestParam("designation") String designation,@RequestParam("prix") String prix,@RequestParam("stock") String stock,@RequestParam("categorie") String categorie,@RequestParam("image") String image,ModelAndView model) throws SerialException, SQLException {
+    	
+    	Articles article = new Articles();
+    	article.setCategorie(categorie);
+    	article.setDesignation(designation);
+    	article.setPrix(Integer.parseInt(prix));
+    	article.setStock(stock);
+    	
+    	byte[] byteData = image.getBytes();//Better to specify encoding
+    
+    	articleDAO.AjoutArticle(article,byteData);
+    	
+    	 return "ajoutproduit";
+
+		//return "ajoutproduit";
+    }
+    
+    
+    
+    @RequestMapping(value = { "/produit/supprimer"}, method = RequestMethod.GET)
+    public ModelAndView SuppressionProduitRedirection(ModelAndView model) {
+    	List <Articles> list = articleDAO.getArticles() ;
+    	model.addObject("list",list);
+    	model.setViewName("supprimerproduit");
+
+        return model;
+    }
+    
+    
+    @RequestMapping(value = { "/produit/supprimer/bycat"}, method = RequestMethod.GET)
+    public String SupprimerProduit(@RequestParam("ref") String ref,ModelAndView model)  {
+    	
+    	
+    	articleDAO.SupprimerProduit(ref);
+    	
+    	 return "supprimerproduit";
+
+		//return "ajoutproduit";
+    }
     
 }

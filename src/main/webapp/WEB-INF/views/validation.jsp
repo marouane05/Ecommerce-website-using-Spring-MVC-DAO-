@@ -1,6 +1,8 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+       <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +21,7 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 
 </head>
 <body>
@@ -55,7 +58,13 @@
         </nav>
 
 
+<c:if test="${pageContext.request.userPrincipal.name != null}">
+        <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
 
+ 
+    </c:if>
 
 
 <br>
@@ -94,7 +103,7 @@
         </div>
       </div>
       <!-- Pro Tier -->
-    
+  
 
   </div>
 </section>
@@ -116,11 +125,7 @@
 
 
 
-
-
-
-
-
+    
 
 
 

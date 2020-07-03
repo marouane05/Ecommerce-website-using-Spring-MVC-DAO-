@@ -1,6 +1,8 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+      <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +55,13 @@
             </div>
         </nav>
 
+<c:if test="${pageContext.request.userPrincipal.name != null}">
+        <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
 
+ 
+    </c:if>
 
 <br>
 
@@ -75,7 +83,7 @@
       <td><c:out value="${VarCatalogues.designation }" /></td>
       <td><c:out value="${VarCatalogues.prix } DH" /></td>
       <td><c:out value="${VarCatalogues.datecommande }" /></td>
-      <td><a href="http://localhost/dryouch/commander/valider?id=${VarCatalogues.id }&name=${pageContext.request.userPrincipal.name}"> Valider la commande </a></td>
+      <td> <a class='btn btn-info btn-xs' href="http://localhost/dryouch/commander/valider?id=${VarCatalogues.id }&name=${pageContext.request.userPrincipal.name}"><span class="glyphicon glyphicon-edit"></span>Valider commande</a><a>&nbsp</a>    </td>
     </tr>
     </tbody>
     </c:forEach>

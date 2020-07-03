@@ -8,12 +8,15 @@
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/welcome" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+        <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
         <intercept-url pattern="/voirarticles" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/detailCatalogue" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/commander" access="hasRole('ROLE_USER')"/>
-        
+        <intercept-url pattern="/ajout" access="hasRole('ROLE_ADMIN')"/>
+       <intercept-url pattern="/ajoutprod" access="hasRole('ROLE_ADMIN')"/>
+         <intercept-url pattern="/produit/supprimer/bycat" access="hasRole('ROLE_ADMIN')"/>
+          <intercept-url pattern="/ajout" access="hasRole('ROLE_ADMIN')"/>
         <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
         <logout logout-success-url="/login?logout" />
     </http>

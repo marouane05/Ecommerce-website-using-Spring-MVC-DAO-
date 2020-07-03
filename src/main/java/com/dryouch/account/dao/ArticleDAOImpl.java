@@ -17,10 +17,12 @@ import java.util.Base64;
 import java.util.List;
 
 import javax.sql.DataSource;
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dryouch.account.model.Articles;
 import com.dryouch.account.model.ArticlesMapper;
@@ -34,6 +36,8 @@ public class ArticleDAOImpl implements ArticleDAO {
 	private final String SQL_GET_ARTICLES_BY_CAT ="select *  from articles  where  categorie=? ";
 	private final String SQL_COMMANDER = " insert into commandes (numcommande,codeclient,prix,valider) values(?,?,?,'non')  ";
 	private final String SQL_VALIDER_COMMANDE = " UPDATE commandes set valider='oui' where id=?  ";
+	private final String SQL_AJOUTER_ARTICLE = " INSERT INTO articles( designation, prix, stock,categorie,photo) VALUES (?,?,?,?,?)  ";
+	private final String SQL_SUPPRIMER_ARTICLE ="DELETE FROM articles where codearticle=?" ; 
 	@Autowired
 	ArticleDAOImpl(DataSource dataSource){
 		jdbcTemplate = new JdbcTemplate(dataSource);
@@ -82,7 +86,16 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 		
 	}
+	public void AjoutArticle(Articles article,byte[]  image) throws SerialException, SQLException {
+		Blob blob = new javax.sql.rowset.serial.SerialBlob(image);
+		jdbcTemplate.update(SQL_AJOUTER_ARTICLE, new Object[] {article.getDesignation(),article.getPrix(),article.getStock(),article.getCategorie(),blob}) ;
+		
+	}
 	
+	public void SupprimerProduit(String ref) {
+		
+		jdbcTemplate.update(SQL_SUPPRIMER_ARTICLE , new Object[] {ref}) ;
+	}
 	
 		
 	
